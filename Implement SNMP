@@ -1,0 +1,16 @@
+1) Take 1 PC, 1 Switch (2960-24TT) & 2 Routers (1841) (R1 & R2)
+2) Select Copper Straight - Through cable
+3) PC: FastEthernet0 --- Switch: FastEthernet 0/1
+4) Switch: FastEthernet0/2 --- R1: FastEthernet 0/0
+5) Switch: FastEthernet0/3 --- R2: FastEthernet 0/0
+6) Click on PC >> Desktop >> IP Configuration
+IPv4: 172.168.1.2
+Gateway: 172.168.1.1
+7) Click on R1 >>> Config >>> FastEthernet 0/0
+IPv4: 172.168.1.1
+8) Click on R2 >>> Config >>> FastEthernet 0/0
+IPv4: 172.168.2.1
+9) Click on R1 >>> CLI
+exit
+snmp-server-community read ro
+snmp-server-community write rw
