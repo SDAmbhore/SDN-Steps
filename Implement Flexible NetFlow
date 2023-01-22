@@ -1,0 +1,29 @@
+Use Syslog diagram
+
+1) Take 1 Server, 1 Router (1841), 1 Switch (2960-24TT) & 1 PC
+2) Select Copper Cross-Over cable
+3) Server: FastEthernet 0 --- Router: FastEthernet 0/0
+4) Router: FastEthernet 0/1 --- Switch: FastEthernet 0/1
+5) Switch: FastEthernet 0/2 --- PC: FastEthernet 0 
+6) Click on PC >>> Desktop >>> IP Configuration 
+IPv4: 30.0.0.2
+Gateway: 30.0.0.1
+7) Click on Router >>> Config >>> FastEthernet 0/0
+IPv4: 10.0.0.1
+8) Click on Server >>> Desktop >>> IP Configuration 
+IPv4: 10.0.0.2
+Gateway: 10.0.0.1
+9) Click on Router >>> Config >>> FastEthernet 0/1
+IPv4: 30.0.0.1
+10) Click on Router >>> CLI
+exit
+service timestamps log datetime msec
+int f/0.1
+11) Click on Router >>> CLI
+int  f0/0
+ip flow ingress
+ip flow egress
+ip flow-export destination 10.0.0.2 99
+ip flow-export source f0/0
+exit
+show ip cache flow
