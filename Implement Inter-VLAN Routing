@@ -1,0 +1,8 @@
+1) Take 1 Router (1841), 2 Switches (2960-24TT) [S1 & S2] and 2 PC [PC-A & PC-B]
+2) Select Copper Straight - Through cable
+3) Router: FastEthernet 0/0 --- S1: FastEthernet 0/1
+4) S1: FastEthernet 0/2 --- S2: FastEthernet 0/1
+5) S1: FastEthernet 0/3 --- PC-A: FastEthernet 0
+6) S2: FastEthernet 0/2 --- PC-B: FastEthernet 0
+
+https://itexamanswers.net/4-5-2-lab-implement-inter-vlan-routing-answers.html
