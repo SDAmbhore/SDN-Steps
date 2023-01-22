@@ -1,0 +1,94 @@
+1) Take 2 Switches (3650-24PS) [D1 & D2] & 1 Switch (2960-24TT) [A1]
+2) Select Copper Straight-Through cable
+3) D1: GigaEthernet 1/0/1 --- D2: GigaEthernet 1/0/1
+4) D1: GigaEthernet 1/0/5 --- A1: FastEthernet 0/1
+5) D1: GigaEthernet 1/0/6 --- A1: FastEthernet 0/2
+6) D2: GigaEthernet 1/0/5 --- A1: FastEthernet 0/3
+7) D2: GigaEthernet 1/0/6 --- A1: FastEthernet 0/4
+8) Click on D1 & D2. Power on switch by dragging
+9) Click on D1 >>> CLI 
+en
+conf t
+hostname D1
+spanning-tree mode pvst
+banner motd # D1, STP Topology Change and RSTP Lab #
+line con 0
+exec-timeout 0 0
+logging synchronous
+exit
+interface range g1/0/1-24, g1/1/1-4, g0/0
+shutdown
+exit
+interface range g1/0/1, g1/0/5-6
+switchport mode trunk
+no shutdown
+exit
+vlan 2
+name SecondVLAN
+exit
+interface vlan 1
+ip address 10.0.0.1 255.0.0.0
+no shutdown
+exit
+
+10) Click on D2 >>> CLI 
+en
+conf t
+hostname D2
+banner motd # D2, STP Topology Change and RSTP Lab #
+spanning-tree mode pvst
+line con 0
+exec-timeout 0 0
+logging synchronous
+exit
+interface range g1/0/1-24, g1/1/1-4, g0/0
+shutdown
+exit
+interface range g1/0/1, g1/0/5-6
+switchport mode trunk
+no shutdown
+exit
+vlan 2
+name SecondVLAN
+exit
+interface vlan 1
+ip address 10.0.0.2 255.0.0.0
+no shutdown
+exit
+
+11) Click on A1 >>> CLI 
+en
+conf t
+hostname A1
+banner motd # A1, STP Topology Change and RSTP Lab #
+spanning-tree mode pvst
+line con 0
+exec-timeout 0 0
+logging synchronous
+exit
+interface range f0/1-24, g0/1-2
+shutdown
+exit
+interface range f0/1-4
+switchport mode trunk
+no shutdown
+exit
+vlan 2
+name SecondVLAN
+exit
+interface vlan 1
+ip address 10.0.0.3 255.0.0.0
+no shutdown
+exit
+end
+show ip int br
+show spanning-tree
+show version | include MAC
+
+12) Click on D1 >>> CLI 
+end
+show spanning-tree active
+
+13) Click on D2 >>> CLI 
+end
+show spanning-tree active
