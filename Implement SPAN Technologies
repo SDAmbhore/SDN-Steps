@@ -1,0 +1,12 @@
+1) Take 2 PC's (PC1 & PC2) & 1 Switch (2960-24TT)
+2) Select Copper Straight - Through cable
+3) PC1: FastEthernet 0 --- Switch: FastEthernet 0/1
+4) Switch: FastEthernet 0/1 --- PC2: FastEthernet 0
+5) Select Switch & Go to CLI. Type commands:
+en
+conf t
+monitor session 1 source int f0/1
+monitor session 1 destination int f0/2
+end
+show monitor session 1
+show monitor detail
